@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import PropTypes from "prop-types";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 const consoleLog = (n) =>
   console.log("****** Profile.js -- line: " + n + " ******");
@@ -22,7 +22,10 @@ Profile.defaultProps = {
 export default function Profile() {
   return (
     <View style={styles.container}>
-      <Text>Profile Component</Text>
+      <Text style={{ fontSize: 36 }}>Profile Component</Text>
+      <TouchableOpacity onPress={() => {}} style={styles.btn}>
+        <Text>Log out</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -32,5 +35,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  btn: {
+    padding: 10,
+    backgroundColor: "coral",
+    borderRadius: 5,
+    marginTop: 20,
   },
 });

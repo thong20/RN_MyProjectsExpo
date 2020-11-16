@@ -1,0 +1,39 @@
+======================================
+
+cách lấy bundleID IOS:
+chỉ cần gõ lệnh:
+expo build:ios => Enter
+
+======================================
+
+Truy cập vào https://developers.facebook.com để tạo app
+Sau khi đăng ký app thành công, ta tiếp tục
+tạo 2 Platform ios và android
+- Các thông tin chúng ta cần có trong app là:
+App ID, bundleID, Key Hashes của Android
+- Cuối cùng kích hoạt Live mode là xong
+Privacy Policy URL, User Data Deletion, Catagory
+
+* App ID: sau khi đăng ký App thành công
+* bundleID: để có bundleID, ta chạy lệnh:
+expo build:ios => Enter, sau đó ta lấy trong file app.json
+vd: com.thong20.RNMyProjectsExpo
+* Key Hashes: là mã Facebook Key Hash sau khi chạy lệnh:
+expo fetch:android:hashes => Enter
+
+Google Certificate Fingerprint:     2F:8B:1A:52:23:E4:29:15:55:24:B2:88:35:42:5D:3B:B8:91:6E:19
+Google Certificate Hash (SHA-1):    2F8B1A5223E429155524B28835425D3BB8916E19
+Google Certificate Hash (SHA-256):  C73A036CC85794188F4372C6C0A83214BB680136418FEC969BC0ABA5069E400A
+Facebook Key Hash:                  L4saUiPkKRVVJLKINUJdO7iRbhk=
+
+* Privacy Policy URL: là address hiển thị nội dung chính sách bảo mật
+của trang web, vd: https://www.onlinekhabar.com/privacy-policy
+* User Data Deletion: chọn "Data Deletion Instructions URL" =>
+paste url privacy-policy vào ô kế tiếp:
+https://www.onlinekhabar.com/privacy-policy
+
+======================================
+
+
+
+
