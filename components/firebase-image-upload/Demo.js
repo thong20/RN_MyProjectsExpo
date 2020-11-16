@@ -4,22 +4,22 @@ import PropTypes from "prop-types";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 const consoleLog = (n) =>
-  console.log("****** Login.js -- line: " + n + " ******");
+  console.log("****** Demo.js -- line: " + n + " ******");
 
 // khai báo props
-Login.propTypes = {
+Demo.propTypes = {
   //   todos: PropTypes.array,
   //   onTodoClick: PropTypes.function,
 };
 
 // Khởi tạo giá trị default cho props khi không nhận được
 // từ parent
-Login.defaultProps = {
+Demo.defaultProps = {
   //   todos: [],
   //   onTodoClick: null,
 };
 
-export default function Login(props) {
+export default function Demo(props) {
   const { navigation } = props;
 
   return (
