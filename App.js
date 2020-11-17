@@ -4,16 +4,15 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import Login from "./components/expo-facebook/Login";
-import Profile from "./components/expo-facebook/Profile";
+// import Demo from "./components/expo-image-picker/Demo";
+import Demo from "./components/firebase-image-upload/Demo";
 
 const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="Upload Image" component={Demo} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,0 +1,18 @@
+giả sử ta có đoạn code:
+var ref = firebase.storage().ref().child('images/' + imageName)
+return ref.put(blob)
+
+do thư viện firebase này chạy trên Javascript nên ta sẽ search từ
+khóa 'javascript sdk' trong website của firebase
+Kết quả ta có được address:
+https://firebase.google.com/docs/reference/js
+
+Sau khi truy cập vào address trên, sidebar bên Trái, ta chọn
+mục firebase.storage => chọn tiếp Overview
+Theo nội dung của method firebase.storage() ta thấy kết
+quả trả về 1 'Storage'
+- ok, ta sẽ tìm hiểu tiếp về 'Storage'
+và 'Storage' nó có method ref(), method này trả
+về 1 'Reference'
+- tiếp tục, ta sẽ tìm hiểu về 'Reference'
+và 'Reference' nó có method child()
