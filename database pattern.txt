@@ -1,0 +1,124 @@
+[
+  users: [
+    {
+      id: "1122",
+      name: "user1",
+      email: "user1@gmail.com",
+      password: "11223344",
+      data: [
+        {
+          id: "rp-20200915-124914",
+          date: "2020/09/15",
+          electricIndex: 2321,
+          electricIndexOld: 1982,
+          electricUnitPrice: 3000,
+          waterIndex: 1120,
+          waterIndexOld: 1103,
+          waterUnitPrice: 7000,
+          garbage: 15000,
+          cableTV: 0,
+          room: 1700000
+        },
+        {
+          id: "rp-20200814-124976",
+          date: "2020/08/14",
+          electricIndex: 1982,
+          electricIndexOld: 1758,
+          electricUnitPrice: 3000,
+          waterIndex: 1103,
+          waterIndexOld: 1089,
+          waterUnitPrice: 7000,
+          garbage: 15000,
+          cableTV: 0,
+          room: 1700000
+        },
+        {
+          id: "rp-20200715-124999",
+          date: "2020/07/15",
+          electricIndex: 1758,
+          electricIndexOld: 1576,
+          electricUnitPrice: 3000,
+          waterIndex: 1089,
+          waterIndexOld: 1074,
+          waterUnitPrice: 7000,
+          garbage: 15000,
+          cableTV: 0,
+          room: 1700000
+        },
+        {
+          id: "rp-20200615-124923",
+          date: "2020/06/13",
+          electricIndex: 1576,
+          electricIndexOld: 1389,
+          electricUnitPrice: 3000,
+          waterIndex: 1074,
+          waterIndexOld: 1058,
+          waterUnitPrice: 7000,
+          garbage: 15000,
+          cableTV: 0,
+          room: 1700000
+        },
+      ]
+    },
+    {
+      id: "3344",
+      name: "user2",
+      email: "user2@gmail.com",
+      password: "11112222",
+      data: [
+        {
+          id: "rp-20200915-124914",
+          date: "2020/09/15",
+          electricIndex: 2321,
+          electricIndexOld: 1982,
+          electricUnitPrice: 3000,
+          waterIndex: 1120,
+          waterIndexOld: 1103,
+          waterUnitPrice: 7000,
+          garbage: 15000,
+          cableTV: 0,
+          room: 1700000
+        },
+        {
+          id: "rp-20200814-124976",
+          date: "2020/08/14",
+          electricIndex: 1982,
+          electricIndexOld: 1758,
+          electricUnitPrice: 3000,
+          waterIndex: 1103,
+          waterIndexOld: 1089,
+          waterUnitPrice: 7000,
+          garbage: 15000,
+          cableTV: 0,
+          room: 1700000
+        },
+        {
+          id: "rp-20200715-124999",
+          date: "2020/07/15",
+          electricIndex: 1758,
+          electricIndexOld: 1576,
+          electricUnitPrice: 3000,
+          waterIndex: 1089,
+          waterIndexOld: 1074,
+          waterUnitPrice: 7000,
+          garbage: 15000,
+          cableTV: 0,
+          room: 1700000
+        },
+        {
+          id: "rp-20200615-124923",
+          date: "2020/06/13",
+          electricIndex: 1576,
+          electricIndexOld: 1389,
+          electricUnitPrice: 3000,
+          waterIndex: 1074,
+          waterIndexOld: 1058,
+          waterUnitPrice: 7000,
+          garbage: 15000,
+          cableTV: 0,
+          room: 1700000
+        },
+      ]
+    },
+  ]
+]

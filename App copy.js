@@ -14,8 +14,6 @@ import { indexInitSlice } from './redux/reducer/sliceIndexInit'
 import { unitPriceSlice } from './redux/reducer/sliceUnitPrice'
 import { receiptSlice } from './redux/reducer/sliceReceipt'
 
-import LoginScreen from './screen/Login/Login';
-
 const consoleLog = n => console.log('****** App.js -- line: ' + n + ' ******');
 
 export default function App() {
@@ -98,7 +96,17 @@ export default function App() {
   }, [])
 
   return (
-    <LoginScreen />
+    <Provider store={store}>
+      {
+        show
+          ? <NavigationContainer>
+            <HomeDrawer />
+          </NavigationContainer>
+
+          : <InitialData fromInitialData={submit} />
+      }
+
+    </Provider>
   )
 }
 
