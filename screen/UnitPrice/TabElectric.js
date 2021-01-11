@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import format from '../../Features/standardize'
 import { Block, Text, Button } from '../../components'

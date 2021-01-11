@@ -10,7 +10,7 @@ import { addUnitPrice, unitPriceSlice } from '../../redux/reducer/sliceUnitPrice
 
 import { Block, Text, Button } from '../../components'
 import * as theme from '../../constants/theme'
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const consoleLog = n => console.log('****** ModalForm.js -- line: ' + n + ' ******');
 
