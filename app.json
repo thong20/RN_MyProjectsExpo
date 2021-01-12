@@ -21,7 +21,7 @@
       "bundleIdentifier": "com.chrisP.managerRoomForRenter"
     },
     "android": {
-      "package": "com.yourcompany.yourappname",
+      "package": "com.chrisP.managerRoomForRenter",
       "versionCode": 1
     },
     "description": ""
