@@ -4,6 +4,12 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// firebase
+import * as firebase from 'firebase'
+import firebaseKey from './configKey/firebaseKey'
+firebase.initializeApp(firebaseKey);
+
+
 import HomeStack from './navigation/HomeStack';
 import HomeDrawer from './navigation/HomeDrawer';
 import InitialData from './screen/InitialData/initialData';
@@ -18,7 +24,8 @@ import LoginScreen from './screen/Login/Login';
 
 const consoleLog = n => console.log('****** App.js -- line: ' + n + ' ******');
 
-export default function App() {
+
+function App() {
   const DATA = store.getState()
   const { electricIndex, waterIndex } = DATA.indexInit
 
@@ -109,3 +116,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
+export {firebase}
+export default App

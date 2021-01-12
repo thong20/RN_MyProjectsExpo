@@ -1,11 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import { View, ScrollView, StyleSheet, Dimensions, TextInput } from "react-native";
 import PropTypes from "prop-types";
 import { Feather } from "@expo/vector-icons";
 
 import * as theme from "../../constants/theme";
 import { Block, Button, Text } from "../../components";
+import { SignInUser } from "../../api-service/firebaseApi";
 
+const consoleLog = n => console.log(`=== LoginForm.js - line: ${n} ================================`)
 const screenWidth = Dimensions.get("window").width;
 
 // Khai báo thuộc tính cho Component
@@ -24,6 +26,18 @@ LoginForm.defaultProps = {
 export default function LoginForm(props) {
   const { flex } = props;
 
+  const [state, setState] = useState({
+    emailAddress: '',
+    password: ''
+  })
+
+  const SignIn = () => {
+    SignInUser(state.emailAddress, state.password)
+      .then((data) => alert(console.log(data)))
+      .catch(err => console.log(err))
+  }
+
+
   return (
     <Block flex={flex}>
       {/* FORM ==================== */}
@@ -36,11 +50,14 @@ export default function LoginForm(props) {
               <TextInput
                 placeholder="E-mail / Username"
                 style={styles.inputText}
+                onChangeText={(str) => setState({...state, emailAddress: str})}
               />
             </Block>
             <Block flex={false} row margin={[30, 0, 0, 0]} style={styles.input}>
               <Feather name="lock" size={30} color={theme.colors.primary} />
-              <TextInput secureTextEntry placeholder="Password" style={styles.inputText} />
+              <TextInput secureTextEntry placeholder="Password" style={styles.inputText}
+                onChangeText={(str) => setState({...state, password: str})}
+              />
             </Block>
           </ScrollView>
         </View>
@@ -48,7 +65,9 @@ export default function LoginForm(props) {
 
       {/* BUTTON ================= */}
       <Block flex={0.6} center >
-        <Button gradient style={{ paddingHorizontal: 30}}>
+        <Button gradient style={{ paddingHorizontal: 30}}
+          onPress={SignIn}
+        >
           <Text white>Đăng nhập</Text>
         </Button>
         <Button style={styles.forgetPassword}>

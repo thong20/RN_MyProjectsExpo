@@ -3,7 +3,6 @@ import { StyleSheet, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import { LinearGradient } from 'expo-linear-gradient';
 
-
 import {Block, Button, Text} from '../../components/index'
 import * as theme from '../../constants/theme'
 import LoginForm from './LoginForm'
@@ -25,12 +24,14 @@ LoginScreen.defaultProps = {
 export default function LoginScreen() {
   const [isActive, setIsActive] = useState(0)
   
+
   const tabs = ['Đăng nhập', 'Đăng ký']
   const flexHeader = 0.3
 
   const handleClickLogin = (idx) => {
     setIsActive(idx)
   }
+
 
 
   return (
