@@ -10,8 +10,8 @@ import RegisterForm from './RegisterForm';
 
 // Khai báo thuộc tính cho Component
 LoginScreen.propTypes = {
-  // todos: PropTypes.array,
-  // onTodoClick: PropTypes.function,
+  signIn: PropTypes.func, // pass from AppLoading.js parent
+  signOut: PropTypes.func, // pass from AppLoading.js parent
 };
 
 // Gán giá trị mặc định cho props, khi
@@ -21,7 +21,8 @@ LoginScreen.defaultProps = {
   // onTodoClick: null,
 };
 
-export default function LoginScreen() {
+export default function LoginScreen(props) {
+  const {signIn, signOut} = props
   const [isActive, setIsActive] = useState(0)
   
 
@@ -32,6 +33,9 @@ export default function LoginScreen() {
     setIsActive(idx)
   }
 
+  const handleAfterSignUp = () => {
+    setIsActive(0)
+  }
 
 
   return (
@@ -62,7 +66,9 @@ export default function LoginScreen() {
       </Block>
       
       {
-        !isActive ? <LoginForm flex={1 - flexHeader}/> : <RegisterForm flex={1 - flexHeader}/>
+        !isActive
+          ? <LoginForm flex={1 - flexHeader} signIn={signIn} signOut={signOut} />
+          : <RegisterForm flex={1 - flexHeader} handleAfterSignUp={handleAfterSignUp}/>
       }
 
     </Block>

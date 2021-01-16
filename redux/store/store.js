@@ -8,9 +8,9 @@ import chartSlice from '../reducer/sliceChart'
 
 const store = configureStore({
   reducer: {
-    receipt: reportSlice,
-    unitPrice: unitPriceSlice,
-    indexInit: indexInitSlice,
+    receipt: reportSlice, // [{}, {}]
+    unitPrice: unitPriceSlice, // {a: [], b: []}
+    indexInit: indexInitSlice, // {}
     chart: chartSlice,
   }
 })

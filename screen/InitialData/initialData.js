@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { Image, Input, ScrollView, StyleSheet, TextInput } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { Block, Text, Button } from '../../components'
 import * as theme from '../../constants/theme'

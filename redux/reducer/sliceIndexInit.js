@@ -9,6 +9,12 @@ const indexInitSlice = createSlice({
   reducers: {
     initIndex: (state, action) => {
       return action.payload
+    },
+    clear: () => {
+      return ({
+        electricIndex: null,
+        waterIndex: null
+      })
     }
   }
 })
@@ -16,5 +22,5 @@ const indexInitSlice = createSlice({
 export { indexInitSlice }
 
 const { reducer, actions } = indexInitSlice
-export const { initIndex } = actions
+export const { initIndex, clear } = actions
 export default reducer

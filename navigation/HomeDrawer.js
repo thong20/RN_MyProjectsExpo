@@ -6,6 +6,11 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
+import AsyncStorage from '@react-native-async-storage/async-storage' 
+import {useSelector} from 'react-redux'
+
+// firebase
+import {fb} from '../AppLoading'
 
 import { LinearGradient } from 'expo-linear-gradient';
 import { Entypo, AntDesign } from '@expo/vector-icons';
@@ -23,6 +28,65 @@ const Drawer = createDrawerNavigator();
 
 function CustomDrawerContent(props) {
   const { navigation } = props
+  const state = useSelector(state => state)
+
+  // firebase
+  const user = fb.auth().currentUser
+  const fbFireStore = fb.firestore()
+
+  // Back up firebase
+  const backup = async () => {
+    
+    fbFireStore
+      .collection('users')
+      .doc(user.uid)
+      .set(state)
+      .then(() => alert('Backup thành công'))
+      .catch(() => alert('Backup không thành công'))
+     
+  }
+  const getAsyncStorage = async () => {
+    console.log('==== AsyncStorage =====================')
+    console.log(await AsyncStorage.getAllKeys())
+    consoleLog(51)
+  }
+  const getDetail = async (key) => {
+    console.log('==== Details =====================')
+    switch (key) {
+      case 'indexInit': {
+        console.log('indexInit:\n', await AsyncStorage.getItem('indexInit'))
+        break;
+      }
+      case 'chart': {
+        console.log('chart:\n', await AsyncStorage.getItem('chart'))
+        break;
+      }
+      case 'unitPrice': {
+        console.log('unitPrice:\n', await AsyncStorage.getItem('unitPrice'))
+        break;
+      }
+      case 'receipt': {
+        console.log('receipt:\n', await AsyncStorage.getItem('sreceipt'))
+        break;
+      }
+      case 'uid': {
+        console.log('uid:', await AsyncStorage.getItem('uid').then(id => {
+          if(id == null) {return 'Là rỗng'}
+          else if(id === 'lQvk7Pkvr2aukCO5vNzq3bUe3lu2') {return 'thong20'}
+          else if(id === 'ToGhqAoNXjRP1ayzvrjHDKePI883') {return 'demo'}
+        }))
+        break;
+      }
+    }
+    consoleLog(59)
+  } 
+  const getReduxState = async () => {
+    console.log('==== state Redux =====================')
+    console.log(state)
+    consoleLog((64))
+  }
+
+
   return (
     <LinearGradient
       colors={[theme.colors.secondary, theme.colors.tertiary]}
@@ -41,7 +105,7 @@ function CustomDrawerContent(props) {
           >
             <Entypo name="user" size={60} color={theme.colors.primary} />
           </Block>
-          <Text h3 white>email@email.com</Text>
+          <Text h3 white>{user.email}</Text>
         </Block>
 
         {/* <DrawerItemList {...props} /> */}
@@ -58,11 +122,75 @@ function CustomDrawerContent(props) {
           icon={() => <AntDesign name='pluscircleo' color='white' size={24} />}
           onPress={() => navigation.navigate('AddNew')}
         />
-        <DrawerItem
+        {/* <DrawerItem
           label="Đơn giá"
           labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
           icon={() => <Entypo name="price-ribbon" color="white" size={24} />}
           onPress={() => navigation.navigate('UnitPrice')}
+        /> */}
+        {/* <DrawerItem
+          label="Sao lưu dữ liệu"
+          labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
+          icon={() => <AntDesign name="sync" color="white" size={24} />}
+          onPress={() => backup()}
+        /> */}
+        <DrawerItem
+          label="Xem AsyncStorage"
+          labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
+          icon={() => <AntDesign name="eyeo" size={24} color="white" />}
+          onPress={() => getAsyncStorage()}
+        />
+        <DrawerItem
+          label="Xem uid"
+          labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
+          icon={() => <AntDesign name="eyeo" size={24} color="white" />}
+          onPress={() => getDetail('uid')}
+        />
+        <DrawerItem
+          label="Set uid là rỗng"
+          labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
+          icon={() => <AntDesign name="eyeo" size={24} color="white" />}
+          onPress={() => AsyncStorage.setItem('uid', JSON.stringify('thong20'))}
+        />
+        <DrawerItem
+          label="Xem indexInit"
+          labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
+          icon={() => <AntDesign name="eyeo" size={24} color="white" />}
+          onPress={() => getDetail('indexInit')}
+        />
+        <DrawerItem
+          label="Xem unitPrice"
+          labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
+          icon={() => <AntDesign name="eyeo" size={24} color="white" />}
+          onPress={() => getDetail('unitPrice')}
+        />
+        <DrawerItem
+          label="Xem chart"
+          labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
+          icon={() => <AntDesign name="eyeo" size={24} color="white" />}
+          onPress={() => getDetail('chart')}
+        />
+        <DrawerItem
+          label="Xem receipt"
+          labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
+          icon={() => <AntDesign name="eyeo" size={24} color="white" />}
+          onPress={() => getDetail('receipt')}
+        />
+        <DrawerItem
+          label="Xem State Redux"
+          labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
+          icon={() => <AntDesign name="eyeo" size={24} color="white" />}
+          onPress={() => getReduxState()}
+        />
+        <DrawerItem
+          label="Sign Out"
+          labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
+          icon={() => <AntDesign name="logout" color="white" size={24} />}
+          onPress={() => (
+            fb.auth().signOut()
+              .then(() => alert('Đăng xuất thành công'))
+              .catch((e) => console.log(e))
+          )}
         />
       </DrawerContentScrollView>
     </LinearGradient>

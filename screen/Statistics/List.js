@@ -10,6 +10,8 @@ import { Button, Block, Text } from '../../components'
 import * as theme from '../../constants/theme'
 import { getAmount } from '../../Features/myGetter'
 
+const consoleLog = n => console.log('=== List.js - line: ' + n + ' ================================')
+
 export default function List(props) {
   const { navigation } = props
   const data = useSelector(state => state.receipt)

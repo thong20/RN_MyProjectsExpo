@@ -54,6 +54,9 @@ const unitPriceSlice = createSlice({
           Arr.pop()
           return Arr
       */
+    },
+    clear: () => {
+      return ({})
     }
   }
 })
@@ -61,5 +64,5 @@ const unitPriceSlice = createSlice({
 export { unitPriceSlice }
 // for react-redux
 const { reducer, actions } = unitPriceSlice
-export const { initUnitPrice, addUnitPrice, updateUnitPrice, removeUnitPrice } = actions
+export const { initUnitPrice, addUnitPrice, updateUnitPrice, removeUnitPrice, clear } = actions
 export default reducer

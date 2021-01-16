@@ -57,10 +57,13 @@ const chartSlice = createSlice({
       state.garbage_cableTV.unshift(action.payload.garbage_cableTV)
       state.room.unshift(action.payload.room)
       state.total.unshift(action.payload.total)
+    },
+    clear: () => {
+      return ({})
     }
   }
 })
-
+export {chartSlice}
 const { reducer, actions } = chartSlice
-export const { importChart, addChartData } = actions
+export const { importChart, addChartData, clear } = actions
 export default reducer

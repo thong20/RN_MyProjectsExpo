@@ -1,6 +1,9 @@
 import store from '../redux/store/store'
 import { createDataChart } from './createDataChart'
 
+import {fb} from '../AppLoading'
+
+
 function getRateChart(receiptList, name) {
   const chart = createDataChart(receiptList)
   const arr = chart[name]
@@ -11,7 +14,6 @@ function getRateChart(receiptList, name) {
 function getSixElementFirst(arr) {
   return arr.filter((value, index) => index < 6)
 }
-
 
 function getAmount(obj) {
   // obj: là item của receipt
@@ -60,7 +62,21 @@ function getDateTime() {
   return { date, month, year, hours, minutes, seconds }
 }
 
+// firebase
+async function getDocUID(uid){
+  const fbFirestore = fb.firestore()
+  return await fbFirestore.collection('users')
+    .doc(uid) // chưa có doc
+    .get()
+    .then( data => data)
+    .catch( err => console.log(err))
+}
+
+
 export {
   getRateChart, getSixElementFirst,
-  getIndexOldValueOf, getDateTime, getAmount
+  getIndexOldValueOf, getDateTime, getAmount,
+
+  //firebase
+  getDocUID
 }
