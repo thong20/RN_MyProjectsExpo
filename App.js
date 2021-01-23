@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-import SelectBox from './features/SelectBox'
+import SelectBox from './Features/SelectBox'
 
 const DATA = [
   {
