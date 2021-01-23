@@ -56,6 +56,10 @@ export default function SelectBox(props) {
   const [selected, setSelected] = useState({})
 
   const _onClick = (itemSelected) => {
+    if(itemSelected.price === selected.price){
+      setSelected({})
+      return
+    }
     setSelected({price: itemSelected.price})
   }
   
