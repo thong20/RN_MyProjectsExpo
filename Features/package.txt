@@ -1,0 +1,2 @@
+"hex-to-rgba": "^2.0.1",
+"@expo/vector-icons": "^10.0.0",
