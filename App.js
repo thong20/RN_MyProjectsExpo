@@ -1,29 +1,49 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import React from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-import Login from "./components/expo-facebook/Login";
-import Profile from "./components/expo-facebook/Profile";
+import SelectBox from './features/SelectBox'
 
-const Stack = createStackNavigator();
+const DATA = [
+  {
+    id: '11',
+    title: 'item 1',
+    price: 3000,
+  },
+  {
+    id: '22',
+    title: 'item 2',
+    price: 2500,
+  },
+  {
+    id: '33',
+    title: 'item 3',
+    price: 2000,
+  },
+]
+
 export default function App() {
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Profile" component={Profile} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View style={styles.container}>
+      <SelectBox
+        DATA={DATA}
+        fontSize={24}
+
+        placeholder={DATA[1].price}
+        
+        onSelect={(value) => console.log(value)}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+
+    alignItems: 'center',
+    justifyContent: 'center',
   },
+
 });
+
