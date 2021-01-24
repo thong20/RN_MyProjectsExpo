@@ -31,7 +31,7 @@ export default function TabWater(props) {
         <Text h3>Tiền phòng:</Text>
         <Block flex={false} row>
           <Text h3>{(fromDetail.room).format()}</Text>
-          <Text title gray> đ / Phòng</Text>
+          <Text title gray> đ / Tháng</Text>
         </Block>
       </Block>
 

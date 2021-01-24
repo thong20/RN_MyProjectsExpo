@@ -12,7 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
-import { addReceipt } from '../../redux/reducer/sliceReceipt'
+import { addReceipt, updateReceipt } from '../../redux/reducer/sliceReceipt'
 
 // Toast
 import {useToast} from 'react-native-styled-toast'
@@ -26,25 +26,30 @@ import SlideForm from "./SlideForm";
 import DatePicker from './DatePicker'
 import BtnForIOS from './btnForIOS';
 import BtnForAndroid from './btnForAndroid';
-import AddElectric from './AddElectric';
-import AddWater from './AddWater';
-import AddRoom from './AddRoom'
+import EditElectric from './EditElectric';
+import EditWater from './EditWater';
+import EditRoom from './EditRoom'
 import { messaging } from 'firebase';
 
-const consoleLog = n => console.log('****** AddNew.js -- line: ' + n + ' ******');
+const consoleLog = n => console.log('****** Edit.js -- line: ' + n + ' ******');
 const { width } = Dimensions.get('window')
 
-AddNew.propTypes = {
+Edit.propTypes = {
   navigation: PropTypes.object, // from Parent: /navigation/HomeDrawer.js
+  item: PropTypes.object, // from Statictis.js => HomeDrawer.js via navigation
+  index: PropTypes.number, // from Statictis.js => HomeDrawer.js via navigation
 }
 
-export default function AddNew(props) {
-  const { navigation } = props;
+export default function Edit(props) {
+  const { navigation, route } = props;
+  const {item: receipt, idx} = route.params
 
   // hooks
-  const dispatch = useDispatch()
-  const receipt = useSelector(state => state.receipt) // usage to add Storage
+  const state = useSelector(state => state)
   const {toast} = useToast()
+  const dispatch = useDispatch()
+  
+  const [newReceipt, setNewReceipt] = useState(receipt)
 
   const [xPos, setXPos] = useState(0);
   const refStep = useRef(0)
@@ -57,28 +62,8 @@ export default function AddNew(props) {
   const month = `0${dateSelected.getMonth() + 1}`.slice(-2)
   const year = dateSelected.getFullYear()
 
-  const [newReceipt, setNewReceipt] = useState({
-    id: `rp-${uuid()}`,
-    date: `${year}/${month}/${date}`,
 
-    electricIndex: 0,
-    electricUnitPrice: 0,
-
-    waterIndex: 0,
-    waterUnitPrice: 0,
-
-    cableTV: 0,
-    garbage: 0,
-    room: 0
-  })
-
-  const [newChart, setNewChart] = useState({})
-
-  const showMode = (currentMode) => {
-    setMode(currentMode);
-  };
-
-  const _combindDataFromChild = (obj, chart) => {
+  const _combineDataFromChild = (obj) => {
 
     if (obj instanceof Date) {
       const date = `0${obj.getDate()}`.slice(-2)
@@ -93,20 +78,23 @@ export default function AddNew(props) {
 
 
   const _handleBtnSave = () => {
-    const tmp = JSON.parse(JSON.stringify(receipt)) // deep copy array Object
-    tmp.unshift(newReceipt)
-    addAsyncStore(tmp)
-
-    toast({message: 'Đã thêm thành công'})
-
-    dispatch(addReceipt(newReceipt))
+    
+    dispatch(updateReceipt(newReceipt))
+    
+    const tmp = JSON.parse(JSON.stringify(state.receipt)) // deep copy array Objecj
+    tmp.splice(idx, 1, newReceipt)
+    updateAsyncStore(tmp)
+    
+    toast({message: 'Đã thay đổi thành công'})
     navigation.goBack()
   }
-  const addAsyncStore = async (arrayReceipts) => {
-    try {
-      await AsyncStorage.setItem('receipt', JSON.stringify(arrayReceipts))
-    } catch (e) {
 
+  const updateAsyncStore = async (arrReceipts) => {
+    try {
+      await AsyncStorage.setItem('receipt', JSON.stringify(arrReceipts))
+    } catch (e) {
+      console.log(e)
+      consoleLog(100)
     }
   }
 
@@ -133,13 +121,13 @@ export default function AddNew(props) {
   const _handleOnChange = (selectedDate) => {
     if (!selectedDate) return
     setShowDatePicker(false)
-    _combindDataFromChild(selectedDate)
+    _combineDataFromChild(selectedDate)
     setDateSelected(selectedDate)
   }
 
   const datePickerForIOS = () => {
     return (
-      <DatePicker propsOnChange={_handleOnChange} />
+      <DatePicker propsOnChange={_handleOnChange} date={receipt.date} />
     )
   }
 
@@ -159,7 +147,7 @@ export default function AddNew(props) {
           </Button>
         </Block>
 
-        { showDatePicker && <DatePicker propsOnChange={_handleOnChange} />}
+        { showDatePicker && <DatePicker propsOnChange={_handleOnChange} date={receipt.date} />}
       </Block>
     )
   }
@@ -188,9 +176,9 @@ export default function AddNew(props) {
               : datePickerForAndroid()
           }
 
-          <AddElectric dataFromElectric={_combindDataFromChild} />
-          <AddWater dataFromWater={_combindDataFromChild} />
-          <AddRoom dataFromRoom={_combindDataFromChild} />
+          <EditElectric dataFromElectric={_combineDataFromChild} receipt={receipt}/>
+          <EditWater dataFromWater={_combineDataFromChild} receipt={receipt}/>
+          <EditRoom dataFromRoom={_combineDataFromChild} receipt={receipt}/>
         </ScrollView>
       </Block>
 

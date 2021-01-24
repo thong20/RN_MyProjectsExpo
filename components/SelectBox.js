@@ -191,6 +191,10 @@ export default function SelectBox(props) {
 
   const _handlePriceSelected = (item) => {
     onSelect(item.price)
+    if(priceSelected === item.price){
+      setPriceSelected(0)
+      return
+    }
     setPriceSelected(item.price)
   }
 

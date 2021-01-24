@@ -43,7 +43,7 @@ export default function TabWater(props) {
         <Text h3>Tiêu thụ:</Text>
         <Block flex={false} row>
           <Text h3>{usage.format()}</Text>
-          <Text title gray> kW</Text>
+          <Text title gray> m3</Text>
         </Block>
       </Block>
 

@@ -8,27 +8,32 @@ import { Block, Button, Text } from "../../components";
 import { ScrollView } from "react-native-gesture-handler";
 
 // firebase
-import {signUpUser} from '../../api-service/firebaseApi'
+import {fb} from '../../AppLoading'
+import {signOutUser, signUpUser, createDocForNewUser} from '../../api-service/firebaseApi'
+
+
+// Toast
+import {useToast} from 'react-native-styled-toast'
 
 const screenWidth = Dimensions.get("window").width;
 
 // Khai báo thuộc tính cho Component
-LoginForm.propTypes = {
+RegisterForm.propTypes = {
   flex: PropTypes.number, // passed from Login.js parent
-  handleAfterSignUp: PropTypes.func, // passed from Login.js parent
 };
 
 // Gán giá trị mặc định cho props, khi
 // props không có giá trị
-LoginForm.defaultProps = {
+RegisterForm.defaultProps = {
   // todos: [],
   // onTodoClick: null,
 };
 
+const consoleLog = n => console.log('=== RegisterForm.js - line: ' + n + ' ================================')
 
-
-export default function LoginForm(props) {
-  const { flex, handleAfterSignUp } = props;
+export default function RegisterForm(props) {
+  const { flex } = props;
+  
   const [form, setForm] = useState({
     username: '',
     email: '',
@@ -36,15 +41,25 @@ export default function LoginForm(props) {
     passwordConfirm: ''
   })
 
+
+  // Toast
+  const {toast} = useToast()
+
   const signUp = () => {
-    signUpUser(form.email, form.password)
+    console.log('run signUp()')
+    consoleLog(50)
+    signUpUser(form.email, form.password) // return Promise
       .then(data => {
-        alert(data)
-        handleAfterSignUp()
+        toast({message: 'Đăng ký thành công!'})
+        return createDocForNewUser(data.user.uid) // Promise
       })
-      .catch(err => alert(err))
+      .then(() => signOutUser()) //Promise
+      .catch(err => toast({massage: 'Đăng ký không thành công!'}))    
   }
 
+
+  console.log('Trang RegisterForm.js')
+  consoleLog(59)
   return (
     <Block flex={flex}>
       {/* FORM ==================== */}
@@ -81,7 +96,7 @@ export default function LoginForm(props) {
               />
               
             </Block>
-            <Block flex={false} row margin={[30, 0, 0, 0]} style={styles.input}>
+            {/* <Block flex={false} row margin={[30, 0, 0, 0]} style={styles.input}>
               <Feather name="lock" size={30} color={theme.colors.primary}
                 onChangeText={(str) => setForm({...form, password2: str})}
               />
@@ -90,7 +105,7 @@ export default function LoginForm(props) {
                 placeholder="Password confirm"
                 style={styles.inputText}
               />
-            </Block>
+            </Block> */}
           </ScrollView>
         </View>
       </Block>

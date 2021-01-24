@@ -9,7 +9,14 @@ import {
 import PropTypes from "prop-types";
 import { Feather } from "@expo/vector-icons";
 
+// firebase
+import { signInUser } from "../../api-service/firebaseApi";
+
+// AsyncStorage
 import AsyncStorage from '@react-native-async-storage/async-storage'
+
+// Toast
+import {useToast} from 'react-native-styled-toast'
 
 import * as theme from "../../constants/theme";
 import { Block, Button, Text } from "../../components";
@@ -22,8 +29,8 @@ const consoleLog = (n) =>
 // Khai báo thuộc tính cho Component
 LoginForm.propTypes = {
   flex: PropTypes.number, // passed from Login.js parent
-  signIn: PropTypes.func, // passed from AppLoading.js => Login.js parent
-  signOut: PropTypes.func, // passed from AppLoading.js => Login.js parent
+  // signIn: PropTypes.func, // passed from AppLoading.js => Login.js parent
+  // signOut: PropTypes.func, // passed from AppLoading.js => Login.js parent
    
 };
 
@@ -35,12 +42,23 @@ LoginForm.defaultProps = {
 };
 
 export default function LoginForm(props) {
-  const { flex, signIn, signOut } = props;
+  const { flex } = props;
 
   const [state, setState] = useState({
     emailAddress: "",
     password: "",
   });
+  
+
+  const {toast} = useToast()
+
+  const signIn = (state) => {
+    // console.log('Clicked Sign In')
+    signInUser(state.emailAddress, state.password)
+      // .then((data) => alert(data))
+      .then(data => toast({ message: data }))
+      .catch((err) => toast({ message: err, accentColor: 'error', iconColor: 'error', iconName: "x-circle" }));
+  };
   
   const clearData = () => {
     AsyncStorage.clear().then(data => alert('Xóa thành công'))

@@ -12,23 +12,29 @@ export const signInUser = (email, password) => {
 }
 
 export const signOutUser = () => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => 
     fb.auth().signOut()
-      .then(data => resolve('Đăng xuất thành công'))
+      .then(data => resolve(data))
       .catch(error => reject(error))
-  })
+  )
 }
 
 export const signUpUser = (email, password) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => 
     fb.auth().createUserWithEmailAndPassword(email, password)
-      .then(data => resolve('Đăng ký thành công'))
-      .catch(error => reject('Đăng ký không thành công'))
-  })
+    .then(data => resolve(data))
+    .catch(error => reject(error))
+  )
 }
 
-
-
+export const createDocForNewUser = (uid) => {
+  return new Promise((resolve, reject) => 
+    fb.firestore().collection('users').doc(uid).set({})
+    .then(data => resolve(data))
+    .catch(error => reject(error))
+  )
+}
+// lkajsdl
 
 
 

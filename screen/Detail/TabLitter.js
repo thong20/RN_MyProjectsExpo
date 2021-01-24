@@ -34,7 +34,7 @@ export default function TabWater(props) {
         <Text h3>Rác:</Text>
         <Block flex={false} row>
           <Text h3>{(fromDetail.garbage).format()}</Text>
-          <Text title gray> đ / Phòng</Text>
+          <Text title gray> đ / Tháng</Text>
         </Block>
       </Block>
 
@@ -42,7 +42,7 @@ export default function TabWater(props) {
         <Text h3>Cáp TV:</Text>
         <Block flex={false} row>
           <Text h3>{(fromDetail.cableTV).format()}</Text>
-          <Text title gray> đ / Phòng</Text>
+          <Text title gray> đ / Tháng</Text>
         </Block>
       </Block>
 

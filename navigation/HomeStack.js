@@ -11,6 +11,7 @@ import Statistics from '../screen/Statistics/Statistics'
 import Detail from '../screen/Detail/Detail'
 import UnitPrice from '../screen/UnitPrice/UnitPrice'
 import AddNew from '../screen/AddNew/AddNew'
+import Edit from '../screen/Edit/Edit'
 
 const consoleLog = n => console.log('****** HomeStack.js -- line: ' + n + ' ******');
 const { width } = Dimensions.get('window')
@@ -86,6 +87,13 @@ export default function HomeStack({ navigation }) {
         component={UnitPrice}
         options={{
           headerTitle: 'Đơn giá'
+        }}
+      />
+      <Stack.Screen
+        name='Edit'
+        component={Edit}
+        options={{
+          headerTitle: 'Thay đổi'
         }}
       />
     </Stack.Navigator>

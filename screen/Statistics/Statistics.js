@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { Image, Dimensions, StyleSheet } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { LinearGradient } from 'expo-linear-gradient';
+import { MenuProvider } from 'react-native-popup-menu'
 
 import { Block, Text, Button } from '../../components'
 import * as theme from '../../constants/theme'

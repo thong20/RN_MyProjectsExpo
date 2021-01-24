@@ -4,15 +4,22 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // my Component
 import App from "./App";
 import Login from "./screen/Login/Login";
+import Toast from './demo-toast/Toast'
 
 // firebase
 import * as fb from "firebase";
 import "firebase/auth";
 import "firebase/firestore";
 
-import key from "./configKey/firebaseKey";
+// Toast
+import { ThemeProvider } from 'styled-components'
+import { ToastProvider, useToast } from 'react-native-styled-toast'
+import theme from './config/themeToast'
+
+
+import key from "./config/firebaseKey";
 import { signInUser, signOutUser } from "./api-service/firebaseApi";
-import FireStorage from "./demoFirebase/FireStorage";
+import FireStore from "./demoFirebase/FireStore";
 import DemoAsyncStorage from "./demoAsyncStorage";
 
 import { Provider } from "react-redux";
@@ -31,22 +38,8 @@ const consoleLog = (n) =>
 
 function AppLoading() {
   const fbAuth = fb.auth();
-
+  
   const [user, setUser] = useState();
-  const [animating, setAnimating] = useState(true);
-
-  const signIn = (state) => {
-    // console.log('Clicked Sign In')
-    signInUser(state.emailAddress, state.password)
-      .then((data) => alert(data))
-      .catch((err) => alert(err));
-  };
-
-  const signOut = () => {
-    signOutUser()
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
-  };
 
   // Handle user state changes
   function onAuthStateChanged(user) {
@@ -60,16 +53,39 @@ function AppLoading() {
     return subscriber; // unsubscribe on unmount
   }, []);
 
+  
   if (!user) {
-    return <Login signIn={signIn} signOut={signOut} />;
+    return (
+      <ThemeProvider theme={theme}>
+        <ToastProvider>
+          {/* <Login signIn={signIn} signOut={signOut} /> */}
+          <Login />
+
+          {/* <DemoAsyncStorage /> */}
+
+        </ToastProvider>
+      </ThemeProvider>
+      )
   } else {
     return (
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <ThemeProvider theme={theme}>
+        <ToastProvider>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </ToastProvider>
+      </ThemeProvider>
     );
-    // return <FireStorage />
-    // return <DemoAsyncStorage />
+
+    // return <FireStore />
+
+    // return (
+    //   <ThemeProvider theme={theme}>
+    //     <ToastProvider>
+    //       <DemoAsyncStorage />
+    //     </ToastProvider>
+    //   </ThemeProvider>
+    // )
   }
 }
 

@@ -22,6 +22,21 @@ import hexToRgba from 'hex-to-rgba';
 const consoleLog = n => console.log('****** Detail.js -- line: ' + n + ' ******');
 const { width } = Dimensions.get('window')
 
+
+// Khai báo thuộc tính cho Component
+Detail.propTypes = {
+  item: PropTypes.object, // passed from List.js via navigation.navigate()
+  idx: PropTypes.number, // passed from List.js via navigation.navigate()
+};
+
+// Gán giá trị mặc định cho props, khi
+// props không có giá trị
+Detail.defaultProps = {
+  // todos: [],
+  // onTodoClick: null,
+};
+
+
 export default function Detail(props) {
   const { route } = props
   const { item, idx } = route.params

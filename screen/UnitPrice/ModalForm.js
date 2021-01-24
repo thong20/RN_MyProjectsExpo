@@ -5,12 +5,14 @@ import { TextInput, Modal, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient'
 import hexToRgba from 'hex-to-rgba'
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { useSelector, useDispatch } from 'react-redux'
 import { addUnitPrice, unitPriceSlice } from '../../redux/reducer/sliceUnitPrice'
 
+import format from '../../Features/standardize'
 import { Block, Text, Button } from '../../components'
 import * as theme from '../../constants/theme'
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const consoleLog = n => console.log('****** ModalForm.js -- line: ' + n + ' ******');
 
@@ -125,12 +127,16 @@ export default function ModalForm(props) {
               <Text h2>Giá</Text>
               <Block flex={false} row center>
                 <TextInput
+                  value={price && price.format()}
                   keyboardType='numeric'
                   placeholder='$$$$'
                   placeholderTextColor={theme.colors.gray}
                   textAlign='right'
-                  style={[styles.input, { width: 80 }]}
-                  onChangeText={text => setPrice(+text)}
+                  style={[styles.input, { width: 120 }]}
+                  onChangeText={text => {
+                    console.log(price instanceof Number)
+                    setPrice(+text)
+                  }}
                 />
                 <Text gray h2> đ</Text>
               </Block>

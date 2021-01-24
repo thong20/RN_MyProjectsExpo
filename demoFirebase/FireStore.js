@@ -10,26 +10,27 @@ import "firebase/firestore";
 
 const consoleLog = (n) =>
   console.log(
-    "=== FireStorage.js - line: " + n + " ================================"
+    "=== FireStore.js - line: " + n + " ================================"
   );
 
 // Khai báo thuộc tính cho Component
-FireStorage.propTypes = {
+FireStore.propTypes = {
   // todos: PropTypes.array,
   // onTodoClick: PropTypes.function,
 };
 
 // Gán giá trị mặc định cho props, khi
 // props không có giá trị
-FireStorage.defaultProps = {
+FireStore.defaultProps = {
   // todos: [],
   // onTodoClick: null,
 };
 
-export default function FireStorage() {
+export default function FireStore() {
   const fbFireStore = fb.firestore();
 
   const [dataLocal, setDataLocal] = useState();
+  const [name, setName] = useState('')
 
   const getData = async () => {
     await fbFireStore
@@ -47,8 +48,6 @@ export default function FireStorage() {
     const jsonValue = await AsyncStorage.getItem("unitPrice");
     const obj = JSON.parse(jsonValue)
     
-    
-
     fbFireStore
       .collection('users')
       .doc('8888')
@@ -61,8 +60,13 @@ export default function FireStorage() {
     const jsonValue = await AsyncStorage.multiGet(keys)
     console.log(typeof jsonValue)
     consoleLog(55)
-}
+  }
   
+  const createDocWithName = (name) => {
+    console.log(name)
+    consoleLog(67)
+    fbFireStore.collection('users').doc(name).set({})
+  }
 
   useEffect(() => {
     let newArr = null;
@@ -111,6 +115,7 @@ export default function FireStorage() {
           <TextInput
             placeholder="Name"
             style={{ marginLeft: 20, fontSize: 18 }}
+            onChangeText={(str) => setName(str)}
           />
         </Block>
         <Block
@@ -139,6 +144,18 @@ export default function FireStorage() {
             onPress={() => console.log("Clicked")}
           >
             <Text color="blue">Load data</Text>
+          </Button>
+        </Block>
+        <Block>
+          <Button
+            style={{
+              borderWidth: 1,
+              paddingHorizontal: 20,
+              borderColor: "blue",
+            }}
+            onPress={() => createDocWithName(name)}
+          >
+            <Text color="blue">Tạo doc theo Name</Text>
           </Button>
         </Block>
       </Block>

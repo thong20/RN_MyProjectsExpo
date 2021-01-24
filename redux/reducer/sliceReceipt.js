@@ -123,7 +123,7 @@ const receiptSlice = createSlice({
         state[idReceipt] = newReceipt
     },
     removeReceipt: (state, action) => { // hàm này sẽ nhận 1 id cần xóa
-      state.splice(index, 1)
+      state.splice(action.payload, 1)
     },
     clear: () => {
       return ([])
@@ -135,5 +135,5 @@ const receiptSlice = createSlice({
 export { receiptSlice }
 
 const { reducer, actions } = receiptSlice
-export const { addReceipt, updateReceipt, clear } = actions
+export const { addReceipt, updateReceipt, removeReceipt, clear } = actions
 export default reducer

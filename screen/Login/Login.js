@@ -3,6 +3,10 @@ import { StyleSheet, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 import { LinearGradient } from 'expo-linear-gradient';
 
+// firebase
+import {fb} from '../../AppLoading'
+import {signOutUser, createDocForNewUser} from '../../api-service/firebaseApi'
+
 import {Block, Button, Text} from '../../components/index'
 import * as theme from '../../constants/theme'
 import LoginForm from './LoginForm'
@@ -10,8 +14,8 @@ import RegisterForm from './RegisterForm';
 
 // Khai báo thuộc tính cho Component
 LoginScreen.propTypes = {
-  signIn: PropTypes.func, // pass from AppLoading.js parent
-  signOut: PropTypes.func, // pass from AppLoading.js parent
+  // signIn: PropTypes.func, // pass from AppLoading.js parent
+  // signOut: PropTypes.func, // pass from AppLoading.js parent
 };
 
 // Gán giá trị mặc định cho props, khi
@@ -21,8 +25,11 @@ LoginScreen.defaultProps = {
   // onTodoClick: null,
 };
 
+const consoleLog = n => console.log('=== Login.js - line: ' + n + ' ================================')
+
 export default function LoginScreen(props) {
-  const {signIn, signOut} = props
+  // const {signIn, signOut} = props
+  const {} = props
   const [isActive, setIsActive] = useState(0)
   
 
@@ -32,11 +39,6 @@ export default function LoginScreen(props) {
   const handleClickLogin = (idx) => {
     setIsActive(idx)
   }
-
-  const handleAfterSignUp = () => {
-    setIsActive(0)
-  }
-
 
   return (
     <Block>
@@ -66,9 +68,9 @@ export default function LoginScreen(props) {
       </Block>
       
       {
-        !isActive
-          ? <LoginForm flex={1 - flexHeader} signIn={signIn} signOut={signOut} />
-          : <RegisterForm flex={1 - flexHeader} handleAfterSignUp={handleAfterSignUp}/>
+        isActive === 0
+          ? <LoginForm flex={1 - flexHeader} />
+          : <RegisterForm flex={1 - flexHeader} />
       }
 
     </Block>

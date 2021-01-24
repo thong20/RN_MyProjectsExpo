@@ -12,6 +12,9 @@ import {useSelector} from 'react-redux'
 // firebase
 import {fb} from '../AppLoading'
 
+// Toast
+import {useToast} from 'react-native-styled-toast'
+
 import { LinearGradient } from 'expo-linear-gradient';
 import { Entypo, AntDesign } from '@expo/vector-icons';
 import hexToRgba from 'hex-to-rgba'
@@ -33,6 +36,10 @@ function CustomDrawerContent(props) {
   // firebase
   const user = fb.auth().currentUser
   const fbFireStore = fb.firestore()
+
+  // Toast
+  // const {toast} = useToast()
+  const {toast} = useToast()
 
   // Back up firebase
   const backup = async () => {
@@ -122,75 +129,74 @@ function CustomDrawerContent(props) {
           icon={() => <AntDesign name='pluscircleo' color='white' size={24} />}
           onPress={() => navigation.navigate('AddNew')}
         />
-        {/* <DrawerItem
+        <DrawerItem
           label="Đơn giá"
           labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
           icon={() => <Entypo name="price-ribbon" color="white" size={24} />}
           onPress={() => navigation.navigate('UnitPrice')}
-        /> */}
-        {/* <DrawerItem
+        />
+        <DrawerItem
           label="Sao lưu dữ liệu"
           labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
           icon={() => <AntDesign name="sync" color="white" size={24} />}
           onPress={() => backup()}
-        /> */}
-        <DrawerItem
+        />
+        {/* <DrawerItem
           label="Xem AsyncStorage"
           labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
           icon={() => <AntDesign name="eyeo" size={24} color="white" />}
           onPress={() => getAsyncStorage()}
-        />
-        <DrawerItem
+        /> */}
+        {/* <DrawerItem
           label="Xem uid"
           labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
           icon={() => <AntDesign name="eyeo" size={24} color="white" />}
           onPress={() => getDetail('uid')}
-        />
-        <DrawerItem
+        /> */}
+        {/* <DrawerItem
           label="Set uid là rỗng"
           labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
           icon={() => <AntDesign name="eyeo" size={24} color="white" />}
           onPress={() => AsyncStorage.setItem('uid', JSON.stringify('thong20'))}
-        />
-        <DrawerItem
+        /> */}
+        {/* <DrawerItem
           label="Xem indexInit"
           labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
           icon={() => <AntDesign name="eyeo" size={24} color="white" />}
           onPress={() => getDetail('indexInit')}
-        />
-        <DrawerItem
+        /> */}
+        {/* <DrawerItem
           label="Xem unitPrice"
           labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
           icon={() => <AntDesign name="eyeo" size={24} color="white" />}
           onPress={() => getDetail('unitPrice')}
-        />
-        <DrawerItem
+        /> */}
+        {/* <DrawerItem
           label="Xem chart"
           labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
           icon={() => <AntDesign name="eyeo" size={24} color="white" />}
           onPress={() => getDetail('chart')}
-        />
-        <DrawerItem
+        /> */}
+        {/* <DrawerItem
           label="Xem receipt"
           labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
           icon={() => <AntDesign name="eyeo" size={24} color="white" />}
           onPress={() => getDetail('receipt')}
-        />
-        <DrawerItem
+        /> */}
+        {/* <DrawerItem
           label="Xem State Redux"
           labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
           icon={() => <AntDesign name="eyeo" size={24} color="white" />}
           onPress={() => getReduxState()}
-        />
+        /> */}
         <DrawerItem
           label="Sign Out"
           labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
           icon={() => <AntDesign name="logout" color="white" size={24} />}
-          onPress={() => (
+          onPress={() => {
             fb.auth().signOut()
-              .then(() => alert('Đăng xuất thành công'))
-              .catch((e) => console.log(e))
-          )}
+            toast({ message: 'Đăng xuất thành công' })
+          }}
         />
       </DrawerContentScrollView>
     </LinearGradient>
