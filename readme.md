@@ -1,0 +1,1 @@
+Chuẩn hóa chuỗi số của TextInput
