@@ -19,3 +19,5 @@ Với cách chuẩn hóa thông thường, ta sẽ gặp trường hợp render 
   => thỏa điều kiện vòng lặp for, nễn sẽ thếm 2 dấu '.' vào, và thành: 1..1.1.111
   => do chuỗi đầu vào có tồn tại ký tự dấu '.' do ảnh hưởng của thuộc tính value
   => vì vậy ta phải xử lý chuỗi đầu vào, bảo đảm không có dấu '.' trước khi thực hiện vòng lặp for
+
+
