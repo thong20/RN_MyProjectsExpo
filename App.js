@@ -2,14 +2,13 @@ import React from 'react';
 import {View, Text, TextInput, StyleSheet} from 'react-native'
 
 
-const MyComponent = () => {
+const App = () => {
   const [input, setInput] = React.useState('')
   const [show, setShow] = React.useState('')
 
   function formatStringNumber(str){
     // Xử lý, loại bỏ dấu '.'
-    var arrTmp = str.split('.')
-    var n = arrTmp.join('')
+    var n = removeDot(str)
 
     // main
     var array = []
@@ -19,7 +18,12 @@ const MyComponent = () => {
       tmp = tmp.substring(0, tmp.length - 3)
     }
     setShow(array.join('.'))
-    
+  }
+
+  function removeDot(str){
+    let arrTmp = str.split('.')
+    let result = arrTmp.join('')
+    return result
   }
 
   return (
@@ -31,11 +35,13 @@ const MyComponent = () => {
         value={show}
         placeholder="Comment"
         onChangeText={text => {
+          setInput(removeDot(text))
           formatStringNumber(text)
-          setInput(text)
         }}
         style={styles.textInput}
       />
+
+      <Text>input: {input}</Text>
     </View>
   );
 };
@@ -61,4 +67,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default MyComponent;
+export default App;
