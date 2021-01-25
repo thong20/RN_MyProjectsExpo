@@ -14,11 +14,13 @@ Với cách chuẩn hóa thông thường, ta sẽ gặp trường hợp render 
   
   => ta nhập thêm 1 ký tự số nữa là 1, lúc này, 'value' có length là 6 => 1.1111
   
+  
   => thỏa điều kiện vòng lặp for, nên sẽ thêm 1 ký tự dấu '.' vào, và thành => 1.1.111
   
   => lúc này thuộc tính 'value' sẽ nhận length là 7 vì: có thêm dấu '.' là thành 2 dấu '.' và 5 số 1 => 1.1.111
   
   => tiếp tục, ta nhập thêm 1 ký tự số nữa là 1, lúc này, 'value' có length là 8 => 1.1.1111
+  
   
   => thỏa điều kiện vòng lặp for, nễn sẽ thếm 2 dấu '.' vào, và thành: 1..1.1.111
   
