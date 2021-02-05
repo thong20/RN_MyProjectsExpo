@@ -29,7 +29,7 @@ const consoleLog = n => console.log('=== Login.js - line: ' + n + ' ============
 
 export default function LoginScreen(props) {
   // const {signIn, signOut} = props
-  const {} = props
+  const {navigation} = props
   const [isActive, setIsActive] = useState(0)
   
 
@@ -41,7 +41,7 @@ export default function LoginScreen(props) {
   }
 
   return (
-    <Block>
+    <Block color='white'>
       <Block flex={flexHeader} style={styles.header}>
         <LinearGradient
           colors={[theme.colors.secondary, theme.colors.tertiary]}
@@ -69,7 +69,7 @@ export default function LoginScreen(props) {
       
       {
         isActive === 0
-          ? <LoginForm flex={1 - flexHeader} />
+          ? <LoginForm flex={1 - flexHeader} navigation={navigation} />
           : <RegisterForm flex={1 - flexHeader} />
       }
 

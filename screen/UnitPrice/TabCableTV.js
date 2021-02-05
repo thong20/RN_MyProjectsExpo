@@ -39,7 +39,7 @@ export default function TabLitter() {
 
       <Block>
         {
-          cableTV.map((item, index) => <ListShare key={index} item={item} />)
+          cableTV.map((item, index) => <ListShare key={index} item={{...item, unit: 'Tháng'}} />)
         }
       </Block>
     </Block>

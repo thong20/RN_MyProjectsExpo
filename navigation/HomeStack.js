@@ -13,6 +13,7 @@ import UnitPrice from '../screen/UnitPrice/UnitPrice'
 import AddNew from '../screen/AddNew/AddNew'
 import Edit from '../screen/Edit/Edit'
 
+
 const consoleLog = n => console.log('****** HomeStack.js -- line: ' + n + ' ******');
 const { width } = Dimensions.get('window')
 
@@ -96,6 +97,7 @@ export default function HomeStack({ navigation }) {
           headerTitle: 'Thay đổi'
         }}
       />
+
     </Stack.Navigator>
   );
 }

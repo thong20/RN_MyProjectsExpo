@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import {NavigationContainer} from '@react-navigation/native'
 
 // my Component
 import App from "./App";
-import Login from "./screen/Login/Login";
-import Toast from './demo-toast/Toast'
+import LoginStack from "./navigation/LoginStack";
 
 // firebase
 import * as fb from "firebase";
@@ -16,18 +15,10 @@ import { ThemeProvider } from 'styled-components'
 import { ToastProvider, useToast } from 'react-native-styled-toast'
 import theme from './config/themeToast'
 
-
 import key from "./config/firebaseKey";
-import { signInUser, signOutUser } from "./api-service/firebaseApi";
-import FireStore from "./demoFirebase/FireStore";
-import DemoAsyncStorage from "./demoAsyncStorage";
 
 import { Provider } from "react-redux";
 import store from "./redux/store/store";
-import { indexInitSlice } from "./redux/reducer/sliceIndexInit";
-import { unitPriceSlice } from "./redux/reducer/sliceUnitPrice";
-import { receiptSlice } from "./redux/reducer/sliceReceipt";
-import { chartSlice } from "./redux/reducer/sliceChart";
 
 fb.initializeApp(key);
 
@@ -58,11 +49,9 @@ function AppLoading() {
     return (
       <ThemeProvider theme={theme}>
         <ToastProvider>
-          {/* <Login signIn={signIn} signOut={signOut} /> */}
-          <Login />
-
-          {/* <DemoAsyncStorage /> */}
-
+          <NavigationContainer>
+            <LoginStack />
+          </NavigationContainer>
         </ToastProvider>
       </ThemeProvider>
       )
@@ -76,16 +65,6 @@ function AppLoading() {
         </ToastProvider>
       </ThemeProvider>
     );
-
-    // return <FireStore />
-
-    // return (
-    //   <ThemeProvider theme={theme}>
-    //     <ToastProvider>
-    //       <DemoAsyncStorage />
-    //     </ToastProvider>
-    //   </ThemeProvider>
-    // )
   }
 }
 

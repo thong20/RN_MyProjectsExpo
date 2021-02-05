@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { View, StyleSheet, Dimensions, TextInput } from "react-native";
+import { View, StyleSheet, Dimensions, TextInput, Alert } from "react-native";
 import PropTypes from "prop-types";
 import { Feather } from "@expo/vector-icons";
 
@@ -35,85 +35,97 @@ export default function RegisterForm(props) {
   const { flex } = props;
   
   const [form, setForm] = useState({
-    username: '',
     email: '',
     password: '',
     passwordConfirm: ''
   })
-
+  const [eyeOff, setEyeOff] = useState(true)
+  const [eyeOffConfirm, setEyeOffConfirm] = useState(true)
+  const [match, setMatch] = useState(false)
 
   // Toast
   const {toast} = useToast()
 
   const signUp = () => {
-    console.log('run signUp()')
-    consoleLog(50)
-    signUpUser(form.email, form.password) // return Promise
+    
+    if (form.password === form.passwordConfirm){
+
+      signUpUser(form.email.trim(), form.password) // return Promise
       .then(data => {
         toast({message: 'Đăng ký thành công!'})
         return createDocForNewUser(data.user.uid) // Promise
       })
       .then(() => signOutUser()) //Promise
-      .catch(err => toast({massage: 'Đăng ký không thành công!'}))    
+      .catch(err => Alert.alert(
+        'Đăng ký không thành công!',
+        'Kiểm tra lại email và Mật khẩu.',
+      ))    
+    }
+    else{
+      Alert.alert(
+        'Đăng ký không thành công!',
+        'Kiểm tra lại email và Mật khẩu',
+      )
+    }
+    
   }
 
-
-  console.log('Trang RegisterForm.js')
-  consoleLog(59)
   return (
-    <Block flex={flex}>
+    <Block flex={flex} color='white'>
       {/* FORM ==================== */}
       <Block
-        flex={1}
-        bottom
+        flex={false}
+        // bottom
         padding={[0, "10%"]}
-        style={{ justifyContent: "center" }}
+        //style={{ justifyContent: "flex-start" }}
       >
         <View>
           <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingVertical: 20 }}>
-            <Block flex={false} row style={styles.input}>
-              <Feather name="user" size={30} color={theme.colors.primary} />
-              <TextInput placeholder="Username" style={styles.inputText}
-                onChangeText={(str) => setForm({...form, username: str})}
-              />
-            </Block>
-            <Block flex={false} row margin={[30, 0, 0, 0]} style={styles.input}>
+            <Block flex={false} row margin={[10, 0, 0, 0]} style={styles.input}>
               <Feather name="mail" size={30} color={theme.colors.primary} />
-              <TextInput placeholder="E-mail" style={styles.inputText}
+              <TextInput 
+                placeholder="E-mail của bạn"
+                style={styles.inputText}
                 onChangeText={(str) => setForm({...form, email: str})}
               />
             </Block>
 
             <Block flex={false} row margin={[30, 0, 0, 0]} style={styles.input}>
-              <Feather name="lock" size={30} color={theme.colors.primary}
-                onChangeText={(str) => setForm({...form, password1: str})}
-              />
+              <Feather name="lock" size={30} color={theme.colors.primary} />
               <TextInput
-                secureTextEntry
-                placeholder="Password"
+                secureTextEntry={eyeOff}
+                placeholder="Mật khẩu - vd: 12345678"
                 style={styles.inputText}
                 onChangeText={str => setForm({...form, password: str})}
               />
-              
+              <Button style={{height: 'auto'}} onPress={() => setEyeOff(!eyeOff)}>
+                <Feather name={eyeOff ? "eye-off" : "eye"} size={24} color={eyeOff ? theme.colors.gray : theme.colors.primary} />
+              </Button>
             </Block>
-            {/* <Block flex={false} row margin={[30, 0, 0, 0]} style={styles.input}>
-              <Feather name="lock" size={30} color={theme.colors.primary}
-                onChangeText={(str) => setForm({...form, password2: str})}
-              />
+            <Block flex={false} row margin={[30, 0, 0, 0]} style={styles.input}>
+              <Feather name="lock" size={30} color={theme.colors.primary}/>
               <TextInput
-                secureTextEntry
-                placeholder="Password confirm"
+                secureTextEntry={eyeOffConfirm}
+                placeholder="Nhập lại mật khẩu - vd: 12345678"
                 style={styles.inputText}
+                onChangeText={str => setForm({...form, passwordConfirm: str})}
               />
-            </Block> */}
+              <Button style={{height: 'auto'}} onPress={() => setEyeOffConfirm(!eyeOffConfirm)}>
+                <Feather name={eyeOffConfirm ? "eye-off" : "eye"} size={24} color={eyeOffConfirm ? theme.colors.gray : theme.colors.primary} />
+              </Button>
+            </Block>
+            
           </ScrollView>
         </View>
       </Block>
 
       {/* BUTTON ================= */}
-      <Block flex={0.3} center >
+      <Block flex={false} center >
         <Button gradient style={{ paddingHorizontal: 30, marginTop: 10 }}
           onPress={signUp}
+          // onPress={() => {
+          //   console.log('Click')
+          // }}
         >
           <Text white>Đăng ký</Text>
         </Button>

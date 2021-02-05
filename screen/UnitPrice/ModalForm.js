@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types'
 import { TextInput, Modal, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient'
@@ -8,9 +8,8 @@ import hexToRgba from 'hex-to-rgba'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useSelector, useDispatch } from 'react-redux'
-import { addUnitPrice, unitPriceSlice } from '../../redux/reducer/sliceUnitPrice'
+import { addUnitPrice } from '../../redux/reducer/sliceUnitPrice'
 
-import format from '../../Features/standardize'
 import { Block, Text, Button } from '../../components'
 import * as theme from '../../constants/theme'
 
@@ -36,6 +35,27 @@ export default function ModalForm(props) {
   const [month, setMonth] = useState('')
   const [year, setYear] = useState('')
   const [price, setPrice] = useState('')
+  const [showValueTextInput, setShowValueTextInput] = useState('')
+
+  function formatStringNumber(strNumber){
+    // remove dot '.'
+    
+    const n = removeDot(strNumber)
+    
+        // main
+    let array = []
+    let tmp = n
+    for(let i = 0 ; i < n.length / 3 ; i++){
+      array.unshift(tmp.slice(-3))
+      tmp = tmp.substring(0, tmp.length - 3)
+    }
+    setShowValueTextInput(array.join('.'))
+  }
+
+  function removeDot(strNumber){
+    const arrTmp = strNumber.split('.')
+    return arrTmp.join('')
+  }
 
   function addData(name) {
     const fullMonth = `0${month}`.slice(-2)
@@ -48,7 +68,7 @@ export default function ModalForm(props) {
     if (+year > new Date().getFullYear()) { alert('Nhập sai Năm'); return }
     if (+year < 2000) { alert('Nhập sai Năm'); return }
     if (price === '') { alert('Chưa nhập giá'); return }
-    if (price < 1000) { alert('Nhập sai giá'); return }
+    if (price < 1000) { alert('Nhập sai giá here'); return }
 
 
     hideModal()
@@ -60,16 +80,13 @@ export default function ModalForm(props) {
   async function addStore(name, id, date, price) {
     const tmp = JSON.parse(JSON.stringify(unitPrice)) // Deep-clone
     tmp[name].unshift({ id, date, price })
-
-    console.log(tmp) // Ok Object
-    consoleLog(63)
-
     try {
       await AsyncStorage.setItem('unitPrice', JSON.stringify(tmp))
     } catch (e) {
 
     }
   }
+
 
 
   return (
@@ -127,15 +144,16 @@ export default function ModalForm(props) {
               <Text h2>Giá</Text>
               <Block flex={false} row center>
                 <TextInput
-                  value={price && price.format()}
+                  value={showValueTextInput}
                   keyboardType='numeric'
                   placeholder='$$$$'
                   placeholderTextColor={theme.colors.gray}
                   textAlign='right'
-                  style={[styles.input, { width: 120 }]}
+                  style={[styles.input, { width: 180 }]}
+                  type
                   onChangeText={text => {
-                    console.log(price instanceof Number)
-                    setPrice(+text)
+                    setPrice(+removeDot(text))
+                    formatStringNumber(text)
                   }}
                 />
                 <Text gray h2> đ</Text>

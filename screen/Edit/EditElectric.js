@@ -33,6 +33,7 @@ export default function AddElectric(props) {
   const { dataFromElectric, receipt } = props
 
   const unitPrice = useSelector(state => state.unitPrice)
+  const arrReceipts = useSelector(state => state.receipt)
 
   const [electricIndex, setElectricIndex] = useState({ electricIndex: 0 })
   const [electricUnitPrice, setElectricUnitPrice] = useState({ electricUnitPrice: 0 })

@@ -1,6 +1,5 @@
 
 import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -8,15 +7,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {fb} from './AppLoading'
 
 // my Component
-import HomeStack from './navigation/HomeStack';
 import HomeDrawer from './navigation/HomeDrawer';
 import InitialData from './screen/InitialData/initialData';
-import LoginScreen from './screen/Login/Login';
 import { getDocUID } from './Features/myGetter'
 import ActivityIndicatorElement from './components/loadingSpinner'
 
 // Redux Toolkit
-import { Provider } from 'react-redux';
 import store from './redux/store/store';
 import { indexInitSlice } from './redux/reducer/sliceIndexInit'
 import { unitPriceSlice } from './redux/reducer/sliceUnitPrice'
@@ -29,8 +25,6 @@ const consoleLog = n => console.log('===== App.js -- line: ' + n + ' ===========
 
 function App(props) {
   
-
-  const DATA = store.getState()
   const [loading, setLoading] = useState(true)
 
   const [showHome, setShowHome] = useState(true)
@@ -80,8 +74,6 @@ function App(props) {
     store.dispatch(receiptSlice.actions.clear());
     store.dispatch(chartSlice.actions.clear());
   }
-
-  const onAuthStateChanged = user => setUser(user)
 
   useEffect(() => {
 
@@ -157,8 +149,6 @@ function App(props) {
                 return keys.filter(item => !item.includes('firebase') && !item.includes('uid'))
               })
               keys.then(key => { 
-                console.log(key)
-                consoleLog(159)
                 if(key.length != 0){ // clear AsyncStorage
                   AsyncStorage.multiRemove(["receipt", "unitPrice", "indexInit", "chart"])
                 }else{ // không có dữ liệu (Người mới chỉ Khởi tạo index)
@@ -171,8 +161,6 @@ function App(props) {
               clearRedux();
               
               // Fetch
-              console.log('uid:', uid)
-              consoleLog(173)
               getDocUID(uid).then(field => { // field.data() to get value
                 if(field == undefined){ // length: 0
                   setShowHome(false)
@@ -205,8 +193,6 @@ function App(props) {
       return <InitialData fromInitialData={submit} />
     }
   }
-  
-  // return <Toast />
 
 }
 

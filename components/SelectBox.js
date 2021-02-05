@@ -13,7 +13,6 @@ import {
   StyleSheet,
   Modal,
   Dimensions,
-  TouchableWithoutFeedback,
   TouchableOpacity
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -190,12 +189,15 @@ export default function SelectBox(props) {
   const [priceSelected, setPriceSelected] = useState(0)
 
   const _handlePriceSelected = (item) => {
-    onSelect(item.price)
+    
     if(priceSelected === item.price){
+      onSelect(0)
       setPriceSelected(0)
       return
     }
+    onSelect(item.price)
     setPriceSelected(item.price)
+    return
   }
 
   const _showModal = () => {
@@ -222,10 +224,12 @@ export default function SelectBox(props) {
                   DATA.map((item, index) => {
                     const isChecked = (priceSelected === item.price) ? icon.checked : icon.unchecked
                     return (
-                      <TouchableOpacity activeOpacity={0.8} key={`key-${index}`} onPress={() => _handlePriceSelected(item)}>
+                      <TouchableOpacity activeOpacity={0.8} key={`key-${index}`}
+                        onPress={() => _handlePriceSelected(item)}
+                      >
                         <View style={styles.item}>
                           <View style={{ flexDirection: 'row' }}>
-                            <Text style={styles.titleItem}> {item.price} </Text>
+                            <Text style={styles.titleItem}> {(item.price).format()} </Text>
                             <Text style={{ color: '#858585', fontSize: 18 }}> đ</Text>
                           </View>
                           <Image source={isChecked} />

@@ -24,6 +24,34 @@ react-native-screens
 DATE TIME PICKER
 expo install @react-native-community/datetimepicker
 
+TOAST - supported Expo
+yarn add react-native-styled-toast
+
+=== test ====================
+7/2020
+điện: 1.200 x 4.444
+nước: 3.400 x 7.777
+cable: 0
+rác: 0
+phòng: 1.700.000
+
+
+9/2020
+điện: 1.500 x 4.444
+nước: 3.600 x 7.777
+cable: 9.999
+rác: 6.666
+phòng: 1.700.000
+
+10/2020
+điện: 1.550 x 4.444
+nước: 3.700 x 7.777
+cable: 9.999
+rác: 0
+phòng: 7.777
+
+
+
 
 === backup real-data ===================================================================
 initial:

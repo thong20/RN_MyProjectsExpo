@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { updateReceiptsInRedux } from '../../Features/updateReceiptsInRedux'
 
 const receiptSlice = createSlice({
   name: 'receipt',
@@ -116,11 +117,7 @@ const receiptSlice = createSlice({
       state.unshift(action.payload)
     },
     updateReceipt: (state, action) => {
-      const newReceipt = action.payload
-      const idReceipt = state.findIndex(item => item.id === newReceipt.id)
-
-      if (idReceipt >= 0)
-        state[idReceipt] = newReceipt
+      updateReceiptsInRedux(state, action.payload)
     },
     removeReceipt: (state, action) => { // hàm này sẽ nhận 1 id cần xóa
       state.splice(action.payload, 1)

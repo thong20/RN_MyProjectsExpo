@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-import { Block, Text, Button } from '../../components'
+import { Block, Text } from '../../components'
 import { format } from '../../Features/standardize'
 
 const consoleLog = n => console.log('****** List.js -- line: ' + n + ' ******');
@@ -18,7 +18,8 @@ List.defaultProps = {
 
 export default function List(props) {
   const { item } = props
-
+  console.log('item:', item)
+  consoleLog(22)
   return (
     <Block flex={false} row space='between' margin={[5, 0]}>
       <Block flex={false} row>
@@ -31,7 +32,7 @@ export default function List(props) {
 
       <Block flex={false} row>
         <Text h2>{(item.price).format()}</Text>
-        <Text h2 gray bold> đ / kW</Text>
+        <Text h2 gray bold> đ / {item.unit}</Text>
       </Block>
     </Block>
   );

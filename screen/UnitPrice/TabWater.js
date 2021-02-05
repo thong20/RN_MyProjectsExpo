@@ -46,7 +46,7 @@ export default function TabWater() {
 
       <Block>
         {
-          water.map((item, index) => <ListShare key={index} item={item} />)
+          water.map((item, index) => <ListShare key={index} item={{...item, unit: 'm3'}} />)
         }
       </Block>
     </Block>

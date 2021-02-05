@@ -12,7 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
-import { addReceipt, updateReceipt } from '../../redux/reducer/sliceReceipt'
+import { updateReceipt } from '../../redux/reducer/sliceReceipt'
 
 // Toast
 import {useToast} from 'react-native-styled-toast'
@@ -29,7 +29,6 @@ import BtnForAndroid from './btnForAndroid';
 import EditElectric from './EditElectric';
 import EditWater from './EditWater';
 import EditRoom from './EditRoom'
-import { messaging } from 'firebase';
 
 const consoleLog = n => console.log('****** Edit.js -- line: ' + n + ' ******');
 const { width } = Dimensions.get('window')
@@ -80,8 +79,9 @@ export default function Edit(props) {
   const _handleBtnSave = () => {
     
     dispatch(updateReceipt(newReceipt))
-    
-    const tmp = JSON.parse(JSON.stringify(state.receipt)) // deep copy array Objecj
+
+    // update AsyncStorage
+    let tmp = JSON.parse(JSON.stringify(state.receipt)) // deep copy array Objecj
     tmp.splice(idx, 1, newReceipt)
     updateAsyncStore(tmp)
     
@@ -120,6 +120,10 @@ export default function Edit(props) {
   // START -- datePicker for IOS & Android ================================
   const _handleOnChange = (selectedDate) => {
     if (!selectedDate) return
+
+    // console.log(selectedDate)
+    // consoleLog(124)
+
     setShowDatePicker(false)
     _combineDataFromChild(selectedDate)
     setDateSelected(selectedDate)

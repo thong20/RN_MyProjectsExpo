@@ -38,7 +38,7 @@ export default function TabGarbage() {
 
       <Block>
         {
-          garbage.map((item, index) => <ListShare key={index} item={item} />)
+          garbage.map((item, index) => <ListShare key={index} item={{...item, unit: 'Tháng'}} />)
         }
       </Block>
     </Block>

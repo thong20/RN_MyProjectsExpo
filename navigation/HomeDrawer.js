@@ -73,7 +73,13 @@ function CustomDrawerContent(props) {
         break;
       }
       case 'receipt': {
-        console.log('receipt:\n', await AsyncStorage.getItem('sreceipt'))
+        const jsonValue = await AsyncStorage.getItem('receipt')
+        
+         console.log(
+          'receipt:\n',
+          jsonValue != null ? JSON.parse(jsonValue) : null
+        )
+        
         break;
       }
       case 'uid': {
@@ -190,7 +196,7 @@ function CustomDrawerContent(props) {
           onPress={() => getReduxState()}
         /> */}
         <DrawerItem
-          label="Sign Out"
+          label="Đăng xuất"
           labelStyle={{ color: 'white', fontSize: 18, marginLeft: -18 }}
           icon={() => <AntDesign name="logout" color="white" size={24} />}
           onPress={() => {

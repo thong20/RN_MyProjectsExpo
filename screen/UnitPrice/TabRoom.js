@@ -39,7 +39,7 @@ export default function TabLitter() {
 
       <Block>
         {
-          room.map((item, index) => <ListShare key={index} item={item} />)
+          room.map((item, index) => <ListShare key={index} item={{...item, unit: 'Tháng'}} />)
         }
       </Block>
     </Block>

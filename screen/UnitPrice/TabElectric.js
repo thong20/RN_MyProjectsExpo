@@ -107,7 +107,7 @@ export default function TabElectric(props) {
 
       <Block>
         {
-          electric.map((item, index) => <ListShare key={index} item={item} />)
+          electric.map((item, index) => <ListShare key={index} item={{...item, unit: 'Kw'}} />)
         }
       </Block>
 
